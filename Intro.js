@@ -77,6 +77,6 @@ class Intro extends Phaser.Scene {
       }]
     });
 
-    this.scene.start("playGame");
+    // this.scene.start("playGame");
   }
 }
