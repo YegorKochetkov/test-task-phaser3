@@ -3,9 +3,6 @@ class Tutorial extends Phaser.Scene {
     super("Tutorial");
   }
 
-  preload() {
-  }
-
   create() {
     this.nextScene = 1;
     this.gameData = "";

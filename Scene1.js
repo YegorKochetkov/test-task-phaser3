@@ -7,9 +7,6 @@ class Scene1 extends Phaser.Scene {
     this.gameData = data;
   }
 
-  preload() {
-  }
-
   create() {
     this.nextScene = 2;
 
