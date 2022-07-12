@@ -28,6 +28,10 @@ class Intro extends Phaser.Scene {
   }
 
   create() {
+    // adapt game size to screen
+    window.addEventListener('resize', () => this.resize());
+    this.resize();
+
     this.background = this.add
       .image(-350, 0, "background-home")
       .setOrigin(0, 0)
@@ -128,5 +132,21 @@ class Intro extends Phaser.Scene {
         onComplete: () => this.scene.start("Tutorial"),
       }]
     });
+  }
+
+  resize() {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    const canvas = this.game.canvas;
+    const wratio = width / height;
+    const ratio = this.game.config.width / this.game.config.height;
+    
+    if (wratio < ratio) {
+        canvas.style.width = width + "px";
+        canvas.style.height = (width / ratio) + "px";
+    } else {
+        canvas.style.width = (height * ratio) + "px";
+        canvas.style.height = height + "px";
+    }
   }
 }

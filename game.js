@@ -3,6 +3,7 @@ window.onload = function () {
     type: Phaser.AUTO,
     width: 600,
     height: 900,
+    title: "My Fantasy: Make Your Story",
     scene: [Intro, Tutorial, Scene1, Scene2, Scene3, Scene4],
   }
 
