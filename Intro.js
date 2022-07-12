@@ -37,7 +37,7 @@ class Intro extends Phaser.Scene {
       .sprite(-10, -200, "man-flirty")
       .setScale(.9)
       .setOrigin(0,0);
-      
+
     this.man.flipX = true;
 
     this.girl = this.add
