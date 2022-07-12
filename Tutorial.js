@@ -76,11 +76,9 @@ class Tutorial extends Phaser.Scene {
         scale: 1,
         duration: 500,
         delay: 300,
-        onComplete: () => this.isShowHint = true,
+        onStart: () => this.isShowHint = true,
       }],
     });
-
-    this.currText = "dress";
 
     // hint appearance
     this.isShowHint = false;
@@ -88,16 +86,17 @@ class Tutorial extends Phaser.Scene {
 
     // tooltip, text and pointer are hidden 
     this.tooltip = this.add
-      .image(60, -110, "tooltip")
+      .image(0, 0, "tooltip")
       .setOrigin(0, 0)
       .setScale(.5);
-    
+
+
     this.pointer = this.add
       .image(130, 1200, "pointer")
       .setOrigin(0, 0)
       .setScale(.7);
 
-    this.text = this.add.text(200, -110, `Choose your ${this.currText}`,
+    this.text = this.add.text(0, 0, "Choose your dress",
     { fontFamily: '"Nunito Sans", "Times New Roman", serif',
       fontStyle: "normal",
       fontWeight: 700,
@@ -106,7 +105,10 @@ class Tutorial extends Phaser.Scene {
       letterSpacing: -0.05,
       color: "#ffffff"
     });
-  
+
+    Phaser.Display.Align.In.Center(this.text, this.add.zone(300, -110, 600, 900));
+    Phaser.Display.Align.In.Center(this.tooltip, this.add.zone(540, -110, 600, 900));
+    
     // action on user`s choice
     this.choice1.setInteractive().on('pointerdown',
       () => this.onChoice(this.choice1));
@@ -123,12 +125,19 @@ class Tutorial extends Phaser.Scene {
   onChoice(choice) {
     this.isShowHint = false,
     this.isHintAnimation = false,
-    this.pointer.setY(900),
+    this.pointer.setAlpha(0),
+    this.tweens.timeline({
+      tweens: [{
+        targets: [this.text, this.tooltip],
+        y: -110,
+        duration: 400,
+      }]
+    }),
     this.tweens.timeline({
       tweens: [{
         targets: choice,
         scale: .95,
-        duration: 300,
+        duration: 200,
         yoyo: true,
         repeat: 0,
         onComplete: () => {
@@ -147,7 +156,7 @@ class Tutorial extends Phaser.Scene {
       this.tweens.timeline({
         tweens: [{
           targets: this.text,
-          y: 15,
+          y: 16,
           duration: 200,
           delay: 100,
         }],
@@ -182,7 +191,7 @@ class Tutorial extends Phaser.Scene {
         targets: this.pointer,
         x: 420,
         ease: 'Linear',
-        duration: 700,
+        duration: 600,
         repeat: 0,
         delay: 300,
       });
@@ -191,7 +200,7 @@ class Tutorial extends Phaser.Scene {
         targets: this.pointer,
         x: 130,
         ease: 'Linear',
-        duration: 700,
+        duration: 600,
         repeat: 0,
         delay: 300,
       });
