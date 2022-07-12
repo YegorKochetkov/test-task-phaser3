@@ -76,63 +76,37 @@ class Tutorial extends Phaser.Scene {
         scale: 1,
         duration: 500,
         delay: 300,
+        onComplete: () => this.isShowHint = true,
       }],
     });
 
-    // tooltip appearance
+    this.currText = "dress";
+
+    // hint appearance
+    this.isShowHint = false;
+    this.isHintAnimation = true;
+
+    // tooltip, text and pointer are hidden 
     this.tooltip = this.add
       .image(60, -110, "tooltip")
       .setOrigin(0, 0)
       .setScale(.5);
     
-    this.currText = "dress";
-
-    this.text = this.add.text(200, -110, `Choose your ${this.currText}`,
-      { fontFamily: '"Nunito Sans", "Times New Roman", serif',
-        fontStyle: "normal",
-        fontWeight: 700,
-        fontSize: 24,
-        lineHeight: 33,
-        letterSpacing: -0.05,
-        color: "#ffffff"
-      });
-
-    this.tweens.timeline({
-      tweens: [{
-        targets: this.text,
-        y: 15,
-        duration: 500,
-        delay: 100,
-      }],
-    });
-
-    // hint appearance
-    this.isShowHint = false;
-
     this.pointer = this.add
       .image(130, 1200, "pointer")
       .setOrigin(0, 0)
       .setScale(.7);
 
-    this.tweens.timeline({
-      tweens: [{
-        targets: this.tooltip,
-        y: 10,
-        duration: 500,
-        delay: 100,
-      }],
+    this.text = this.add.text(200, -110, `Choose your ${this.currText}`,
+    { fontFamily: '"Nunito Sans", "Times New Roman", serif',
+      fontStyle: "normal",
+      fontWeight: 700,
+      fontSize: 24,
+      lineHeight: 33,
+      letterSpacing: -0.05,
+      color: "#ffffff"
     });
-
-    this.tweens.timeline({
-      tweens: [{
-        targets: this.pointer,
-        y: 680,
-        duration: 600,
-        delay: 600,
-        onComplete: () => this.isShowHint = true,
-      }],
-    });
-
+  
     // action on user`s choice
     this.choice1.setInteractive().on('pointerdown',
       () => this.onChoice(this.choice1));
@@ -142,12 +116,13 @@ class Tutorial extends Phaser.Scene {
 
   update() {
     //show hint
-    this.isShowHint && this.showHint(this.pointer, this.choice1, this.choice2);
+    this.isHintAnimation && this.showHint(this.pointer, this.choice1, this.choice2);
   }
 
   // action on user`s choice: save choice and start new scene
   onChoice(choice) {
     this.isShowHint = false,
+    this.isHintAnimation = false,
     this.pointer.setY(900),
     this.tweens.timeline({
       tweens: [{
@@ -168,6 +143,40 @@ class Tutorial extends Phaser.Scene {
 
   // hint animation
   showHint(...args) {
+    if (this.text.y !== 15 && this.isShowHint === true) {
+      this.tweens.timeline({
+        tweens: [{
+          targets: this.text,
+          y: 15,
+          duration: 200,
+          delay: 100,
+        }],
+      });
+    }
+
+    if (this.pointer.y !== 680 && this.isShowHint === true) {
+      this.tweens.timeline({
+        tweens: [{
+          targets: this.pointer,
+          y: 680,
+          duration: 200,
+          delay: 100,
+        }],
+      });
+    }
+
+    if (this.tooltip.y !== 10 && this.isShowHint === true) {
+      this.tweens.timeline({
+        tweens: [{
+          targets: this.tooltip,
+          y: 10,
+          duration: 200,
+          delay: 100,
+          onComplete: () => this.isShowHint = false
+        }],
+      });
+    }
+  
     if (this.pointer.y === 680 && this.pointer.x === 130) {
       this.tweens.add({
         targets: this.pointer,
