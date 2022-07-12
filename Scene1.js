@@ -8,17 +8,6 @@ class Scene1 extends Phaser.Scene {
   }
 
   preload() {
-    // for scene 2
-    this.load.image("girl-dress1-bag1", "assets/girl-dress1-bag1.png");
-    this.load.image("girl-dress1-bag2", "assets/girl-dress1-bag2.png");
-    this.load.image("girl-dress2-bag1", "assets/girl-dress2-bag1.png");
-    this.load.image("girl-dress2-bag2", "assets/girl-dress2-bag2.png");
-
-    this.load.image("accessory-1", "assets/accessory-1.png");
-    this.load.image("accessory-2", "assets/accessory-2.png");
-    this.load.image("accessory-3", "assets/accessory-3.png");
-
-    this.load.image("progressbar-2", "assets/progressbar-2.png");
   }
 
   create() {

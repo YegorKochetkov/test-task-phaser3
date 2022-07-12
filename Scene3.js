@@ -8,12 +8,6 @@ class Scene3 extends Phaser.Scene {
   }
 
   preload() {
-    // for scene4
-    this.load.image("background-day", "assets/background-day.jpg");
-    this.load.image("background-evening", "assets/background-evening.jpg");
-    this.load.image("Paul-phrase-2", "assets/Paul-phrase-2.png");
-    this.load.image("play-now", "assets/play-now.png");
-    this.load.image("link-tint", "assets/tint.png");
   }
 
   create() {

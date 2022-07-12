@@ -4,15 +4,6 @@ class Tutorial extends Phaser.Scene {
   }
 
   preload() {
-    // for scene 1
-    this.load.image("girl-joy-dress1", "assets/girl-joy-dress1.png");
-    this.load.image("girl-joy-dress2", "assets/girl-joy-dress2.png");
-
-    this.load.image("bag-1", "assets/bag-1.png");
-    this.load.image("bag-2", "assets/bag-2.png");
-
-    this.load.image("progressbar-0", "assets/progressbar-empty.png");
-    this.load.image("progressbar-1", "assets/progressbar-1.png");
   }
 
   create() {

@@ -3,7 +3,69 @@ class Intro extends Phaser.Scene {
     super("Intro");
   }
 
-  preload() {
+  preload() {var progressBar = this.add.graphics();
+    const progressBox = this.add.graphics();
+
+    const width = this.cameras.main.width;
+    const height = this.cameras.main.height;
+    const loadingText = this.make.text({
+        x: width / 2,
+        y: height / 2 - 50,
+        text: 'Загрузка...',
+        style: {
+            font: '20px monospace',
+           fill: '#ffffff'
+        }
+    });
+
+    loadingText.setOrigin(0.5, 0.5);
+
+    const percentText = this.make.text({
+        x: width / 2,
+        y: height / 2 - 5,
+        text: '0%',
+        style: {
+            font: '18px monospace',
+            fill: '#ffffff'
+        }
+    });
+
+    percentText.setOrigin(0.5, 0.5);
+
+    const assetText = this.make.text({
+        x: width / 2,
+        y: height / 2 + 50,
+        text: '',
+        style: {
+            font: '18px monospace',
+            fill: '#ffffff'
+        }
+    });
+    assetText.setOrigin(0.5, 0.5);
+
+    progressBox.fillStyle(0x222222, 0.8);
+    progressBox.fillRect(240, 270, 320, 50);
+
+    this.load.on('progress', function (value) {
+        percentText.setText(parseInt(value * 100) + '%');
+        progressBar.clear();
+        progressBar.fillStyle(0xffffff, 1);
+        progressBar.fillRect(250, 280, 300 * value, 30);
+    });
+
+    this.load.on('fileprogress', function (file) {
+        assetText.setText('Загрузка ресурса: ' + file.key);
+    });
+
+    this.load.on('complete', function () {
+        console.log('Завершено');
+        progressBar.destroy();
+        progressBox.destroy();
+        loadingText.destroy();
+        percentText.destroy();
+        assetText.destroy();
+    });
+
     // for intro
     this.load.image("man-flirty", "assets/man-flirty.png");
     this.load.image("man-joy", "assets/man-joy.png");
@@ -25,6 +87,50 @@ class Intro extends Phaser.Scene {
 
     this.load.image("tooltip", "assets/tooltip.png");
     this.load.image("pointer", "assets/pointer.png");
+
+    // for scene 1
+    this.load.image("girl-joy-dress1", "assets/girl-joy-dress1.png");
+    this.load.image("girl-joy-dress2", "assets/girl-joy-dress2.png");
+
+    this.load.image("bag-1", "assets/bag-1.png");
+    this.load.image("bag-2", "assets/bag-2.png");
+
+    this.load.image("progressbar-0", "assets/progressbar-empty.png");
+    this.load.image("progressbar-1", "assets/progressbar-1.png");
+
+    // for scene 2
+    this.load.image("girl-dress1-bag1", "assets/girl-dress1-bag1.png");
+    this.load.image("girl-dress1-bag2", "assets/girl-dress1-bag2.png");
+    this.load.image("girl-dress2-bag1", "assets/girl-dress2-bag1.png");
+    this.load.image("girl-dress2-bag2", "assets/girl-dress2-bag2.png");
+
+    this.load.image("accessory-1", "assets/accessory-1.png");
+    this.load.image("accessory-2", "assets/accessory-2.png");
+    this.load.image("accessory-3", "assets/accessory-3.png");
+
+    this.load.image("progressbar-2", "assets/progressbar-2.png");
+
+    //scene 3
+    this.load.image("girl-1", "assets/girl-dress1-bag1-accessory1.png");
+    this.load.image("girl-2", "assets/girl-dress1-bag1-accessory2.png");
+    this.load.image("girl-3", "assets/girl-dress1-bag2-accessory1.png");
+    this.load.image("girl-4", "assets/girl-dress1-bag2-accessory2.png");
+    this.load.image("girl-5", "assets/girl-dress2-bag1-accessory1.png");
+    this.load.image("girl-6", "assets/girl-dress2-bag1-accessory2.png");
+    this.load.image("girl-7", "assets/girl-dress2-bag2-accessory1.png");
+    this.load.image("girl-8", "assets/girl-dress2-bag2-accessory2.png");
+
+    this.load.image("beach-1", "assets/beach-1.png");
+    this.load.image("beach-2", "assets/beach-2.png");
+
+    this.load.image("progressbar-3", "assets/progressbar-3.png");
+    
+    // for scene4
+    this.load.image("background-day", "assets/background-day.jpg");
+    this.load.image("background-evening", "assets/background-evening.jpg");
+    this.load.image("Paul-phrase-2", "assets/Paul-phrase-2.png");
+    this.load.image("play-now", "assets/play-now.png");
+    this.load.image("link-tint", "assets/tint.png");
   }
 
   create() {
