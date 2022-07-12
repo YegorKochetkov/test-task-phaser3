@@ -8,57 +8,55 @@ class Scene2 extends Phaser.Scene {
   }
 
   preload() { 
-    this.gameData[0] === "1" && this.load.image("prevGirl-1", "assets/girl-joy-dress1.png");
-    this.gameData[0] === "2" && this.load.image("prevGirl-2", "assets/girl-joy-dress2.png");
+    //scene 3
+    this.load.image("girl-1", "assets/girl-dress1-bag1-accessory1.png");
+    this.load.image("girl-2", "assets/girl-dress1-bag1-accessory2.png");
+    this.load.image("girl-3", "assets/girl-dress1-bag2-accessory1.png");
+    this.load.image("girl-4", "assets/girl-dress1-bag2-accessory2.png");
+    this.load.image("girl-5", "assets/girl-dress2-bag1-accessory1.png");
+    this.load.image("girl-6", "assets/girl-dress2-bag1-accessory2.png");
+    this.load.image("girl-7", "assets/girl-dress2-bag2-accessory1.png");
+    this.load.image("girl-8", "assets/girl-dress2-bag2-accessory2.png");
 
-    this.load.image("girl-dress1-bag1", "assets/girl-dress1-bag1.png");
-    this.load.image("girl-dress1-bag2", "assets/girl-dress1-bag2.png");
-    this.load.image("girl-dress2-bag1", "assets/girl-dress2-bag1.png");
-    this.load.image("girl-dress2-bag2", "assets/girl-dress2-bag2.png");
+    this.load.image("beach-1", "assets/beach-1.png");
+    this.load.image("beach-2", "assets/beach-2.png");
 
-    this.load.image("bag-1", "assets/bag-1.png");
-    this.load.image("bag-2", "assets/bag-2.png");
-
-    this.load.image("accessory-1", "assets/accessory-1.png");
-    this.load.image("accessory-2", "assets/accessory-2.png");
-    this.load.image("accessory-3", "assets/accessory-3.png");
-
-    this.load.image("background-home", "assets/background-home.jpg");
-
-    this.load.image("tooltip", "assets/tooltip.png");
-
-    this.load.image("progressbar-1", "assets/progressbar-1.png");
-    this.load.image("progressbar-2", "assets/progressbar-2.png");
-
-    this.load.image("pointer", "assets/pointer.png");
+    this.load.image("progressbar-3", "assets/progressbar-3.png");
   }
 
   create() {
     this.nextScene = 3;
 
-    this.background = this.add.image(-350, -7, "background-home")
+    this.background = this.add
+      .image(-350, -7, "background-home")
       .setOrigin(0, 0);
   
     // girl change dress at scene start
     this.girl = this.gameData[0] === "1"
-      ? this.add.sprite(110, 32, "prevGirl-1")
+      ? this.add
+          .sprite(110, 32, "girl-joy-dress1")
           .setOrigin(0,0)
-      : this.add.sprite(110, 32, "prevGirl-2")
+      : this.add
+          .sprite(110, 32, "girl-joy-dress2")
           .setOrigin(0,0)
 
-    this.girlInDress1 = this.add.sprite(110, 32, "girl-dress1-bag1")
+    this.girlInDress1 = this.add
+      .sprite(110, 32, "girl-dress1-bag1")
       .setOrigin(0,0)
       .setAlpha(0);
 
-    this.girlInDress2 = this.add.sprite(110, 32, "girl-dress1-bag2")
+    this.girlInDress2 = this.add
+      .sprite(110, 32, "girl-dress1-bag2")
       .setOrigin(0,0)
       .setAlpha(0);
 
-    this.girlInDress3 = this.add.sprite(110, 32, "girl-dress2-bag1")
+    this.girlInDress3 = this.add
+      .sprite(110, 32, "girl-dress2-bag1")
       .setOrigin(0,0)
       .setAlpha(0);
 
-    this.girlInDress4 = this.add.sprite(110, 32, "girl-dress2-bag2")
+    this.girlInDress4 = this.add
+      .sprite(110, 32, "girl-dress2-bag2")
       .setOrigin(0,0)
       .setAlpha(0);
     
@@ -70,6 +68,7 @@ class Scene2 extends Phaser.Scene {
       }],
     });
     
+    // show the girl depending on the player's choice
     if (this.gameData === "11") {
       this.tweens.timeline({
         tweens: [{
@@ -124,7 +123,7 @@ class Scene2 extends Phaser.Scene {
       .setOrigin(0.5, 0.5)
       .setScale(0);
 
-    this.choice2 = this.gameData === "21" 
+    this.choice2 = this.gameData[0] === "2" 
       ? this.add
           .image(435, 708, "accessory-3")
           .setOrigin(0.5, 0.5)

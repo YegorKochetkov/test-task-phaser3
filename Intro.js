@@ -4,6 +4,7 @@ class Intro extends Phaser.Scene {
   }
 
   preload() {
+    // for intro
     this.load.image("man-flirty", "assets/man-flirty.png");
     this.load.image("man-joy", "assets/man-joy.png");
 
@@ -14,6 +15,16 @@ class Intro extends Phaser.Scene {
     this.load.image("Lexy-phrase-1", "assets/Lexy-phrase-1.png");
 
     this.load.image("background-home", "assets/background-home.jpg");
+
+    // for tutorial
+    this.load.image("girl-shy", "assets/girl-shy-regular-cloth.png");
+    this.load.image("girl-joy", "assets/girl-joy-regular-cloth.png");
+
+    this.load.image("dress-1", "assets/dress-1.png");
+    this.load.image("dress-2", "assets/dress-2.png");
+
+    this.load.image("tooltip", "assets/tooltip.png");
+    this.load.image("pointer", "assets/pointer.png");
   }
 
   create() {
@@ -26,6 +37,7 @@ class Intro extends Phaser.Scene {
       .sprite(-10, -200, "man-flirty")
       .setScale(.9)
       .setOrigin(0,0);
+      
     this.man.flipX = true;
 
     this.girl = this.add
@@ -116,6 +128,5 @@ class Intro extends Phaser.Scene {
         onComplete: () => this.scene.start("Tutorial"),
       }]
     });
-    // this.scene.start("Tutorial");
   }
 }

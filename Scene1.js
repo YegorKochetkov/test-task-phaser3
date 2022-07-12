@@ -8,34 +8,29 @@ class Scene1 extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image("girl-shy", "assets/girl-shy-regular-cloth.png");
-    this.load.image("girl-joy-dress1", "assets/girl-joy-dress1.png");
-    this.load.image("girl-joy-dress2", "assets/girl-joy-dress2.png");
+    // for scene 2
+    this.load.image("girl-dress1-bag1", "assets/girl-dress1-bag1.png");
+    this.load.image("girl-dress1-bag2", "assets/girl-dress1-bag2.png");
+    this.load.image("girl-dress2-bag1", "assets/girl-dress2-bag1.png");
+    this.load.image("girl-dress2-bag2", "assets/girl-dress2-bag2.png");
 
-    this.load.image("dress-1", "assets/dress-1.png");
-    this.load.image("dress-2", "assets/dress-2.png");
+    this.load.image("accessory-1", "assets/accessory-1.png");
+    this.load.image("accessory-2", "assets/accessory-2.png");
+    this.load.image("accessory-3", "assets/accessory-3.png");
 
-    this.load.image("bag-1", "assets/bag-1.png");
-    this.load.image("bag-2", "assets/bag-2.png");
-    
-    this.load.image("background-home", "assets/background-home.jpg");
-
-    this.load.image("tooltip", "assets/tooltip.png");
-
-    this.load.image("progressbar-0", "assets/progressbar-empty.png");
-    this.load.image("progressbar-1", "assets/progressbar-1.png");
-
-    this.load.image("pointer", "assets/pointer.png");
+    this.load.image("progressbar-2", "assets/progressbar-2.png");
   }
 
   create() {
     this.nextScene = 2;
 
     // background smooth clear tint
-    this.background = this.add.image(-350, -7, "background-home")
+    this.background = this.add
+      .image(-350, -7, "background-home")
       .setOrigin(0, 0);
 
-    this.backgroundTint = this.add.image(-350, -7, "background-home")
+    this.backgroundTint = this.add
+      .image(-350, -7, "background-home")
       .setOrigin(0, 0)
       .setTint(0x666666);
 
@@ -51,11 +46,13 @@ class Scene1 extends Phaser.Scene {
     this.girl = this.add.sprite(110, 32, "girl-shy")
       .setOrigin(0,0);
 
-    this.girlInDress1 = this.add.sprite(110, 32, "girl-joy-dress1")
+    this.girlInDress1 = this.add
+      .sprite(110, 32, "girl-joy-dress1")
       .setOrigin(0,0)
       .setAlpha(0);
 
-    this.girlInDress2 = this.add.sprite(110, 32, "girl-joy-dress2")
+    this.girlInDress2 = this.add
+      .sprite(110, 32, "girl-joy-dress2")
       .setOrigin(0,0)
       .setAlpha(0);
     
@@ -67,6 +64,7 @@ class Scene1 extends Phaser.Scene {
       }],
     });
     
+    // show the girl depending on the player's choice
     if (this.gameData === "1") {
       this.tweens.timeline({
         tweens: [{

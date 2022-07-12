@@ -4,32 +4,34 @@ class Tutorial extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image("girl-default", "assets/girl-default-regular-cloth.png");
-    this.load.image("girl-shy", "assets/girl-shy-regular-cloth.png");
-    this.load.image("girl-joy", "assets/girl-joy-regular-cloth.png");
+    // for scene 1
+    this.load.image("girl-joy-dress1", "assets/girl-joy-dress1.png");
+    this.load.image("girl-joy-dress2", "assets/girl-joy-dress2.png");
 
-    this.load.image("dress-1", "assets/dress-1.png");
-    this.load.image("dress-2", "assets/dress-2.png");
+    this.load.image("bag-1", "assets/bag-1.png");
+    this.load.image("bag-2", "assets/bag-2.png");
 
-    this.load.image("background-home", "assets/background-home.jpg");
-    this.load.image("tooltip", "assets/tooltip.png");
-    this.load.image("pointer", "assets/pointer.png");
+    this.load.image("progressbar-0", "assets/progressbar-empty.png");
+    this.load.image("progressbar-1", "assets/progressbar-1.png");
   }
 
   create() {
     this.nextScene = 1;
     this.gameData = "";
 
-    this.backgroundTint = this.add.image(-350, 0, "background-home")
+    this.backgroundTint = this.add
+      .image(-350, 0, "background-home")
       .setOrigin(0, 0)
       .setTint(0x666666);
 
-    // girl animation from different images
-    this.girl = this.add.sprite(-30, -230, "girl-surprised")
+    // create talking girl animation from different images
+    this.girl = this.add
+      .sprite(-30, -230, "girl-surprised")
       .setScale(.55)
       .setOrigin(0,0);
       
-    this.girlShy = this.add.sprite(110, 32, "girl-shy")
+    this.girlShy = this.add
+      .sprite(110, 32, "girl-shy")
       .setOrigin(0,0)
       .setAlpha(0);
         
@@ -143,7 +145,7 @@ class Tutorial extends Phaser.Scene {
     this.isShowHint && this.showHint(this.pointer, this.choice1, this.choice2);
   }
 
-  // action on user`s choice
+  // action on user`s choice: save choice and start new scene
   onChoice(choice) {
     this.isShowHint = false,
     this.pointer.setY(900),
