@@ -56,14 +56,6 @@ class Scene1 extends Phaser.Scene {
       .setOrigin(0,0)
       .setAlpha(0);
     
-    this.tweens.timeline({
-      tweens: [{
-        targets: this.girl,
-        alpha: 0,
-        duration: 300,
-      }],
-    });
-    
     // show the girl depending on the player's choice
     if (this.gameData === "1") {
       this.tweens.timeline({

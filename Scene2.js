@@ -22,6 +22,7 @@ class Scene2 extends Phaser.Scene {
     this.load.image("beach-2", "assets/beach-2.png");
 
     this.load.image("progressbar-3", "assets/progressbar-3.png");
+    this.load.image("progressbar-3", "assets/progressbar-3.png");
   }
 
   create() {
@@ -32,7 +33,7 @@ class Scene2 extends Phaser.Scene {
       .setOrigin(0, 0);
   
     // girl change dress at scene start
-    this.girl = this.gameData[0] === "1"
+    this.girl = this.gameData.startsWith("1")
       ? this.add
           .sprite(110, 32, "girl-joy-dress1")
           .setOrigin(0,0)
@@ -59,15 +60,7 @@ class Scene2 extends Phaser.Scene {
       .sprite(110, 32, "girl-dress2-bag2")
       .setOrigin(0,0)
       .setAlpha(0);
-    
-    this.tweens.timeline({
-      tweens: [{
-        targets: this.girl,
-        alpha: 0,
-        duration: 300,
-      }],
-    });
-    
+        
     // show the girl depending on the player's choice
     if (this.gameData === "11") {
       this.tweens.timeline({
