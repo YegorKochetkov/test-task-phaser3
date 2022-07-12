@@ -1,54 +1,91 @@
 class Tutorial extends Phaser.Scene {
   constructor() {
-    super("playGame");
+    super("Tutorial");
   }
 
   preload() {
-    this.load.image("background-home", "assets/background-home.jpg");
     this.load.image("girl-default", "assets/girl-default-regular-cloth.png");
     this.load.image("girl-shy", "assets/girl-shy-regular-cloth.png");
     this.load.image("girl-joy", "assets/girl-joy-regular-cloth.png");
-    this.load.image("tooltip", "assets/tooltip.png");
+
     this.load.image("dress-1", "assets/dress-1.png");
     this.load.image("dress-2", "assets/dress-2.png");
+
+    this.load.image("background-home", "assets/background-home.jpg");
+    this.load.image("tooltip", "assets/tooltip.png");
     this.load.image("pointer", "assets/pointer.png");
   }
 
   create() {
-    this.background = this.add.image(-350, -10, "background-home")
-      .setOrigin(0, 0);
-    this.backgroundTint = this.add.image(-350, -10, "background-home")
+    this.nextScene = 1;
+    this.gameData = "";
+
+    this.backgroundTint = this.add.image(-350, 0, "background-home")
       .setOrigin(0, 0)
       .setTint(0x666666);
 
+    // girl animation from different images
     this.girl = this.add.sprite(-30, -230, "girl-surprised")
       .setScale(.55)
       .setOrigin(0,0);
-    
-    this.anims.create({
-      key: "girl-shy",
-      frames: [
-        { key: "girl-surprised", duration: 600 },
-        { key: "girl-shy" },
-      ],
-      frameRate: 8,
-      repeat: 0,
+      
+    this.girlShy = this.add.sprite(110, 32, "girl-shy")
+      .setOrigin(0,0)
+      .setAlpha(0);
+        
+    this.tweens.timeline({
+      tweens: [{
+        targets: this.girl,
+        y: -148,
+        x: 24,
+        scale: .47,
+        duration: 400,
+        delay: 100,
+        onComplete: () => (
+          this.girl.setAlpha(0),
+          this.girlShy.setAlpha(1)
+        )
+      }],
     });
-  
 
-    this.dress1 = this.add.image(165, 708, "dress-1");
-    this.dress1.setOrigin(0.5, 0.5).setScale(0);
+    // selection icons appearance
+    this.choice1 = this.add
+      .image(165, 708, "dress-1")
+      .setOrigin(0.5, 0.5)
+      .setScale(0);
 
-    this.dress2 = this.add.image(435, 708, "dress-2");
-    this.dress2.setOrigin(0.5, 0.5).setScale(0);
+    this.choice2 = this.add
+      .image(435, 708, "dress-2")
+      .setOrigin(0.5, 0.5)
+      .setScale(0);
 
-    this.tooltip = this.add.image(60, -110, "tooltip");
-    this.tooltip.setOrigin(0, 0).setScale(.5);
+    this.tweens.timeline({
+      tweens: [{
+        targets: this.choice1,
+        scale: 1,
+        duration: 500,
+        delay: 100,
+      }],
+    });
 
-    this.pointer = this.add.image(130, 1200, "pointer");
-    this.pointer.setOrigin(0, 0).setScale(.7);
+    this.tweens.timeline({
+      tweens: [{
+        targets: this.choice2,
+        scale: 1,
+        duration: 500,
+        delay: 300,
+      }],
+    });
 
-    this.text1 = this.add.text(200, -110, "Choose your dress",
+    // tooltip appearance
+    this.tooltip = this.add
+      .image(60, -110, "tooltip")
+      .setOrigin(0, 0)
+      .setScale(.5);
+    
+    this.currText = "dress";
+
+    this.text = this.add.text(200, -110, `Choose your ${this.currText}`,
       { fontFamily: '"Nunito Sans", "Times New Roman", serif',
         fontStyle: "normal",
         fontWeight: 700,
@@ -60,75 +97,134 @@ class Tutorial extends Phaser.Scene {
 
     this.tweens.timeline({
       tweens: [{
-          targets: [this.girl],
-          y: -130,
-          x: 20,
-          scale: .48,
-          duration: 500,
-          delay: 100,
-          onStart: () => this.girl.play("girl-shy"),
+        targets: this.text,
+        y: 15,
+        duration: 500,
+        delay: 100,
+      }],
+    });
+
+    // hint appearance
+    this.isShowHint = false;
+
+    this.pointer = this.add
+      .image(130, 1200, "pointer")
+      .setOrigin(0, 0)
+      .setScale(.7);
+
+    this.tweens.timeline({
+      tweens: [{
+        targets: this.tooltip,
+        y: 10,
+        duration: 500,
+        delay: 100,
       }],
     });
 
     this.tweens.timeline({
       tweens: [{
-          targets: [this.tooltip],
-          y: 10,
-          duration: 500,
-          delay: 100,
+        targets: this.pointer,
+        y: 680,
+        duration: 600,
+        delay: 600,
+        onComplete: () => this.isShowHint = true,
       }],
     });
 
-    this.tweens.timeline({
-      tweens: [{
-          targets: [this.text1],
-          y: 15,
-          duration: 500,
-          delay: 100,
-      }],
-    });
+    // action on user`s choice
+    this.choice1.setInteractive().on('pointerdown',
+      () => this.onChoice(this.choice1));
+    this.choice2.setInteractive().on('pointerdown',
+      () => this.onChoice(this.choice2));
+  }
 
+  update() {
+    //show hint
+    this.isShowHint && this.showHint(this.pointer, this.choice1, this.choice2);
+  }
+
+  // action on user`s choice
+  onChoice(choice) {
+    this.isShowHint = false,
+    this.pointer.setY(900),
     this.tweens.timeline({
       tweens: [{
-          targets: [this.dress1],
+        targets: choice,
+        scale: .95,
+        duration: 300,
+        yoyo: true,
+        repeat: 0,
+        onComplete: () => {
+          this.gameData = choice === this.choice1 ? this.gameData + 1 : this.gameData + 2;
+          
+          return this.scene
+          .start("Scene" + this.nextScene, this.gameData)
+        }
+      }],
+    })
+  }
+
+  // hint animation
+  showHint(...args) {
+    if (this.pointer.y === 680 && this.pointer.x === 130) {
+      this.tweens.add({
+        targets: this.pointer,
+        x: 420,
+        ease: 'Linear',
+        duration: 700,
+        repeat: 0,
+        delay: 300,
+      });
+    } else if (this.pointer.x === 420) {
+      this.tweens.add({
+        targets: this.pointer,
+        x: 130,
+        ease: 'Linear',
+        duration: 700,
+        repeat: 0,
+        delay: 300,
+      });
+    }
+
+    if (this.pointer.y === 680 && this.pointer.x === 420) {
+      this.tweens.timeline({
+        tweens: [{
+          targets: this.choice2,
+          scale: .95,
+          duration: 150,
+          repeat: 0,
+        }],
+      });
+    } else {
+      this.tweens.timeline({
+        tweens: [{
+          targets: this.choice2,
           scale: 1,
-          duration: 500,
-          delay: 600,
-      }],
-    });
-
-    this.tweens.timeline({
-      tweens: [{
-          targets: [this.dress2],
+          duration: 150,
+          repeat: 0,
+        }],
+      });
+    }
+    
+    if (this.pointer.y === 680 && this.pointer.x === 130) {
+      this.tweens.timeline({
+        tweens: [{
+          targets: this.choice1,
+          scale: .95,
+          duration: 150,
+          yoyo: true,
+          repeat: 0,
+        }],
+      });
+    } else {
+      this.tweens.timeline({
+        tweens: [{
+          targets: this.choice1,
           scale: 1,
-          duration: 500,
-          delay: 1100,
-      }],
-    });
-
-    this.tweens.timeline({
-      tweens: [{
-          targets: [this.pointer],
-          y: 680,
-          duration: 600,
-          delay: 1200,
-      }],
-    });
-
-    // this.tweens.timeline({
-    //   tweens: [{
-    //       targets: [this.girl],
-    //       alpha: 1,
-    //       duration: 0,
-    //   }],
-    // });
-
-    this.tweens.timeline({
-      tweens: [{
-          targets: [this.backgroundTint],
-          alpha: 0,
-          duration: 1600,
-      }],
-    });
+          duration: 150,
+          repeat: 0,
+        }],
+      });
+    }
   }
 }
