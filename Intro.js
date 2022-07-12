@@ -3,18 +3,21 @@ class Intro extends Phaser.Scene {
     super("Intro");
   }
 
-  preload() {var progressBar = this.add.graphics();
+  preload() {
+    // boot progress
+    const progressBar = this.add.graphics();
     const progressBox = this.add.graphics();
 
     const width = this.cameras.main.width;
     const height = this.cameras.main.height;
+    
     const loadingText = this.make.text({
         x: width / 2,
         y: height / 2 - 50,
-        text: 'Загрузка...',
+        text: "Loading...",
         style: {
-            font: '20px monospace',
-           fill: '#ffffff'
+            font: "20px monospace",
+           fill: "#ffffff"
         }
     });
 
@@ -23,10 +26,10 @@ class Intro extends Phaser.Scene {
     const percentText = this.make.text({
         x: width / 2,
         y: height / 2 - 5,
-        text: '0%',
+        text: "0%",
         style: {
-            font: '18px monospace',
-            fill: '#ffffff'
+            font: "18px monospace",
+            fill: "#ffffff"
         }
     });
 
@@ -35,30 +38,29 @@ class Intro extends Phaser.Scene {
     const assetText = this.make.text({
         x: width / 2,
         y: height / 2 + 50,
-        text: '',
+        text: "",
         style: {
-            font: '18px monospace',
-            fill: '#ffffff'
+            font: "18px monospace",
+            fill: "#ffffff"
         }
     });
     assetText.setOrigin(0.5, 0.5);
 
     progressBox.fillStyle(0x222222, 0.8);
-    progressBox.fillRect(240, 270, 320, 50);
+    progressBox.fillRect(50, 270, 500, 50);
 
-    this.load.on('progress', function (value) {
-        percentText.setText(parseInt(value * 100) + '%');
+    this.load.on("progress", function (value) {
+        percentText.setText(parseInt(value * 100) + "%");
         progressBar.clear();
         progressBar.fillStyle(0xffffff, 1);
-        progressBar.fillRect(250, 280, 300 * value, 30);
+        progressBar.fillRect(50, 270, 500 * value, 50);
     });
 
-    this.load.on('fileprogress', function (file) {
-        assetText.setText('Загрузка ресурса: ' + file.key);
+    this.load.on("fileprogress", function (file) {
+        assetText.setText("Loading file: " + file.key);
     });
 
-    this.load.on('complete', function () {
-        console.log('Завершено');
+    this.load.on("complete", function () {
         progressBar.destroy();
         progressBox.destroy();
         loadingText.destroy();
@@ -135,7 +137,7 @@ class Intro extends Phaser.Scene {
 
   create() {
     // adapt game size to screen
-    window.addEventListener('resize', () => this.resize());
+    window.addEventListener("resize", () => this.resize());
     this.resize();
 
     this.background = this.add
