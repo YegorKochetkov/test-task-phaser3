@@ -97,7 +97,6 @@ class Scene4 extends Phaser.Scene {
         y: 55,
         ease: "Linear",
         duration: 400,
-        // delay: 100,
       }]
     });
 
@@ -107,7 +106,6 @@ class Scene4 extends Phaser.Scene {
         x: 115,
         ease: "Linear",
         duration: 400,
-        // delay: 100,
       }]
     });
 

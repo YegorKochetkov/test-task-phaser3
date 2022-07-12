@@ -48,6 +48,7 @@ class Scene3 extends Phaser.Scene {
         .setOrigin(0,0)
     }
 
+    // getting ready to show the selected character
     this.girlInDress1 = this.add
       .sprite(110, 32, "girl-1")
       .setOrigin(0,0)
@@ -88,93 +89,89 @@ class Scene3 extends Phaser.Scene {
       .setOrigin(0,0)
       .setAlpha(0);
     
-    // this.tweens.timeline({
-    //   tweens: [{
-    //     targets: this.girl,
-    //     alpha: 0,
-    //     duration: 300,
-    //   }],
-    // });
-    
     // show the girl depending on the player's choice
-    if (this.gameData === "111") {
-      this.tweens.timeline({
-        tweens: [{
-          targets: this.girlInDress1,
-          alpha: 1,
-          duration: 300,
-        }],
-      });
-    }
-    
-    if (this.gameData === "112") {
-      this.tweens.timeline({
-        tweens: [{
-          targets: this.girlInDress2,
-          alpha: 1,
-          duration: 300,
-        }],
-      });
-    }
-    
-    if (this.gameData === "121") {
-      this.tweens.timeline({
-        tweens: [{
-          targets: this.girlInDress3,
-          alpha: 1,
-          duration: 300,
-        }],
-      });
-    }
-    
-    if (this.gameData === "122") {
-      this.tweens.timeline({
-        tweens: [{
-          targets: this.girlInDress4,
-          alpha: 1,
-          duration: 300,
-        }],
-      });
-    }
-    
-    if (this.gameData === "211") {
-      this.tweens.timeline({
-        tweens: [{
-          targets: this.girlInDress5,
-          alpha: 1,
-          duration: 300,
-        }],
-      });
-    }
-    
-    if (this.gameData === "212") {
-      this.tweens.timeline({
-        tweens: [{
-          targets: this.girlInDress6,
-          alpha: 1,
-          duration: 300,
-        }],
-      });
-    }
-    
-    if (this.gameData === "221") {
-      this.tweens.timeline({
-        tweens: [{
-          targets: this.girlInDress7,
-          alpha: 1,
-          duration: 300,
-        }],
-      });
-    }
-    
-    if (this.gameData === "222") {
-      this.tweens.timeline({
-        tweens: [{
-          targets: this.girlInDress8,
-          alpha: 1,
-          duration: 300,
-        }],
-      });
+    switch (true) {
+      case this.gameData.startsWith("111"):
+        this.tweens.timeline({
+          tweens: [{
+            targets: this.girlInDress1,
+            alpha: 1,
+            duration: 300,
+          }],
+        });
+      break;
+
+      case this.gameData.startsWith("112"):
+        this.tweens.timeline({
+          tweens: [{
+            targets: this.girlInDress2,
+            alpha: 1,
+            duration: 300,
+          }],
+        });
+      break;
+
+      case this.gameData.startsWith("121"):
+        this.tweens.timeline({
+          tweens: [{
+            targets: this.girlInDress3,
+            alpha: 1,
+            duration: 300,
+          }],
+        });
+      break;
+
+      case this.gameData.startsWith("122"):
+        this.tweens.timeline({
+          tweens: [{
+            targets: this.girlInDress4,
+            alpha: 1,
+            duration: 300,
+          }],
+        });
+      break;
+
+      case this.gameData.startsWith("211"):
+        this.tweens.timeline({
+          tweens: [{
+            targets: this.girlInDress5,
+            alpha: 1,
+            duration: 300,
+          }],
+        });
+      break;
+
+      case this.gameData.startsWith("212"):
+        this.tweens.timeline({
+          tweens: [{
+            targets: this.girlInDress6,
+            alpha: 1,
+            duration: 300,
+          }],
+        });
+      break;
+
+      case this.gameData.startsWith("221"):
+        this.tweens.timeline({
+          tweens: [{
+            targets: this.girlInDress7,
+            alpha: 1,
+            duration: 300,
+          }],
+        });
+      break;
+
+      case this.gameData.startsWith("222"):
+        this.tweens.timeline({
+          tweens: [{
+            targets: this.girlInDress8,
+            alpha: 1,
+            duration: 300,
+          }],
+        });
+      break;
+
+      default: this.add.text(10, 10, "Something wrong...");
     }
 
     // selection icons change
@@ -244,15 +241,6 @@ class Scene3 extends Phaser.Scene {
       .setOrigin(0, 0)
       .setAlpha(0);
 
-    // this.tweens.timeline({
-    //   tweens: [{
-    //     targets: [this.tooltip, this.text],
-    //     y: 10,
-    //     duration: 300,
-    //     repeat: 0,
-    //   }]
-    // })
-
     this.tweens.timeline({
       tweens: [{
         targets: this.progressbar2,
@@ -284,16 +272,6 @@ class Scene3 extends Phaser.Scene {
     
     this.isShowHint = false;
 
-      // this.tweens.timeline({
-    //   tweens: [{
-    //     targets: [this.pointer],
-    //     y: 680,
-    //     duration: 600,
-    //     delay: 600,
-    //     onComplete: () => this.isShowHint = true,
-    //   }],
-    // });
-
     this.prevChoice1.setInteractive().on('pointerdown', () => (
       this.isShowHint = !this.isShowHint
     ));
@@ -306,67 +284,4 @@ class Scene3 extends Phaser.Scene {
   update() {
     this.isShowHint && this.showHint(this.pointer, this.prevChoice1, this.prevChoice2);
   }
-
-  // showHint(...args) {
-  //   if (this.isShowHint && this.pointer.y === 680 && this.pointer.x === 130) {
-  //     this.tweens.add({
-  //       targets: this.pointer,
-  //       x: 420,
-  //       ease: 'Linear',
-  //       duration: 700,
-  //       repeat: 0,
-  //       delay: 300,
-  //     });
-  //   } else if (this.pointer.x === 420) {
-  //     this.tweens.add({
-  //       targets: this.pointer,
-  //       x: 130,
-  //       ease: 'Linear',
-  //       duration: 700,
-  //       repeat: 0,
-  //       delay: 300,
-  //     });
-  //   }
-
-  //   if (this.pointer.y === 680 && this.pointer.x === 420) {
-  //     this.tweens.timeline({
-  //       tweens: [{
-  //         targets: this.prevChoice2,
-  //         scale: .95,
-  //         duration: 150,
-  //         repeat: 0,
-  //       }],
-  //     });
-  //   } else {
-  //     this.tweens.timeline({
-  //       tweens: [{
-  //         targets: this.prevChoice2,
-  //         scale: 1,
-  //         duration: 150,
-  //         repeat: 0,
-  //       }],
-  //     });
-  //   }
-    
-  //   if (this.pointer.y === 680 && this.pointer.x === 130) {
-  //     this.tweens.timeline({
-  //       tweens: [{
-  //         targets: this.prevChoice1,
-  //         scale: .95,
-  //         duration: 150,
-  //         yoyo: true,
-  //         repeat: 0,
-  //       }],
-  //     });
-  //   } else {
-  //     this.tweens.timeline({
-  //       tweens: [{
-  //         targets: this.prevChoice1,
-  //         scale: 1,
-  //         duration: 150,
-  //         repeat: 0,
-  //       }],
-  //     });
-  //   }
-  // }
 }

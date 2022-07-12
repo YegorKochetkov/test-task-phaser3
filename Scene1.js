@@ -187,16 +187,6 @@ class Scene1 extends Phaser.Scene {
     
     this.isShowHint = false;
 
-      // this.tweens.timeline({
-    //   tweens: [{
-    //     targets: [this.pointer],
-    //     y: 680,
-    //     duration: 600,
-    //     delay: 600,
-    //     onComplete: () => this.isShowHint = true,
-    //   }],
-    // });
-
     this.prevChoice1.setInteractive().on('pointerdown', () => (
       this.isShowHint = !this.isShowHint
     ));
@@ -209,67 +199,4 @@ class Scene1 extends Phaser.Scene {
   update() {
     this.isShowHint && this.showHint(this.pointer, this.prevChoice1, this.prevChoice2);
   }
-
-  // showHint(...args) {
-  //   if (this.isShowHint && this.pointer.y === 680 && this.pointer.x === 130) {
-  //     this.tweens.add({
-  //       targets: this.pointer,
-  //       x: 420,
-  //       ease: 'Linear',
-  //       duration: 700,
-  //       repeat: 0,
-  //       delay: 300,
-  //     });
-  //   } else if (this.pointer.x === 420) {
-  //     this.tweens.add({
-  //       targets: this.pointer,
-  //       x: 130,
-  //       ease: 'Linear',
-  //       duration: 700,
-  //       repeat: 0,
-  //       delay: 300,
-  //     });
-  //   }
-
-  //   if (this.pointer.y === 680 && this.pointer.x === 420) {
-  //     this.tweens.timeline({
-  //       tweens: [{
-  //         targets: this.prevChoice2,
-  //         scale: .95,
-  //         duration: 150,
-  //         repeat: 0,
-  //       }],
-  //     });
-  //   } else {
-  //     this.tweens.timeline({
-  //       tweens: [{
-  //         targets: this.prevChoice2,
-  //         scale: 1,
-  //         duration: 150,
-  //         repeat: 0,
-  //       }],
-  //     });
-  //   }
-    
-  //   if (this.pointer.y === 680 && this.pointer.x === 130) {
-  //     this.tweens.timeline({
-  //       tweens: [{
-  //         targets: this.prevChoice1,
-  //         scale: .95,
-  //         duration: 150,
-  //         yoyo: true,
-  //         repeat: 0,
-  //       }],
-  //     });
-  //   } else {
-  //     this.tweens.timeline({
-  //       tweens: [{
-  //         targets: this.prevChoice1,
-  //         scale: 1,
-  //         duration: 150,
-  //         repeat: 0,
-  //       }],
-  //     });
-  //   }
-  // }
 }
