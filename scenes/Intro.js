@@ -136,10 +136,6 @@ class Intro extends Phaser.Scene {
   }
 
   create() {
-    // adapt game size to screen
-    window.addEventListener("resize", () => this.resize());
-    this.resize();
-
     this.background = this.add
       .image(-350, 0, "background-home")
       .setOrigin(0, 0)
