@@ -16,8 +16,8 @@ class Intro extends Phaser.Scene {
         y: height / 2 - 50,
         text: "Loading...",
         style: {
-            font: "20px monospace",
-           fill: "#ffffff"
+          font: "20px monospace",
+          fill: "#ffffff"
         }
     });
 
@@ -28,8 +28,8 @@ class Intro extends Phaser.Scene {
         y: height / 2 - 5,
         text: "0%",
         style: {
-            font: "18px monospace",
-            fill: "#ffffff"
+          font: "18px monospace",
+          fill: "#ffffff"
         }
     });
 
@@ -40,8 +40,8 @@ class Intro extends Phaser.Scene {
         y: height / 2 + 50,
         text: "",
         style: {
-            font: "18px monospace",
-            fill: "#ffffff"
+          font: "18px monospace",
+          fill: "#ffffff"
         }
     });
     assetText.setOrigin(0.5, 0.5);
@@ -50,10 +50,10 @@ class Intro extends Phaser.Scene {
     progressBox.fillRect(50, 270, 500, 50);
 
     this.load.on("progress", function (value) {
-        percentText.setText(parseInt(value * 100) + "%");
-        progressBar.clear();
-        progressBar.fillStyle(0xffffff, 1);
-        progressBar.fillRect(50, 270, 500 * value, 50);
+      percentText.setText(parseInt(value * 100) + "%");
+      progressBar.clear();
+      progressBar.fillStyle(0xffffff, 1);
+      progressBar.fillRect(50, 270, 500 * value, 50);
     });
 
     this.load.on("fileprogress", function (file) {
@@ -61,11 +61,11 @@ class Intro extends Phaser.Scene {
     });
 
     this.load.on("complete", function () {
-        progressBar.destroy();
-        progressBox.destroy();
-        loadingText.destroy();
-        percentText.destroy();
-        assetText.destroy();
+      progressBar.destroy();
+      progressBox.destroy();
+      loadingText.destroy();
+      percentText.destroy();
+      assetText.destroy();
     });
 
     // for intro
