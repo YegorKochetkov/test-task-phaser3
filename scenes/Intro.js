@@ -237,20 +237,4 @@ class Intro extends Phaser.Scene {
       }]
     });
   }
-
-  resize() {
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-    const canvas = this.game.canvas;
-    const wratio = width / height;
-    const ratio = this.game.config.width / this.game.config.height;
-    
-    if (wratio < ratio) {
-        canvas.style.width = width + "px";
-        canvas.style.height = (width / ratio) + "px";
-    } else {
-        canvas.style.width = (height * ratio) + "px";
-        canvas.style.height = height + "px";
-    }
-  }
 }
