@@ -155,7 +155,7 @@ class Intro extends Phaser.Scene {
     this.girl = this.add
       .sprite(-900, -230, "girl-default")
       .setScale(.55)
-      .setOrigin(0,0);
+      .setOrigin(0, 0);
 
     this.manPhrase = this.add
       .image(480, 380, "Paul-phrase-1")

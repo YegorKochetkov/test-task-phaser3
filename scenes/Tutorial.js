@@ -74,8 +74,8 @@ class Tutorial extends Phaser.Scene {
 
     // tooltip, text and pointer are hidden 
     this.tooltip = this.add
-      .image(0, 0, "tooltip")
-      .setOrigin(0, 0)
+      .image(300, -110, "tooltip")
+      .setOrigin(0.5, 0.5)
       .setScale(.5);
 
 
@@ -84,18 +84,16 @@ class Tutorial extends Phaser.Scene {
       .setOrigin(0, 0)
       .setScale(.7);
 
-    this.text = this.add.text(0, 0, "Choose your dress",
-    { fontFamily: '"Nunito Sans", "Times New Roman", serif',
-      fontStyle: "normal",
-      fontWeight: 700,
-      fontSize: 24,
-      lineHeight: 33,
-      letterSpacing: -0.05,
-      color: "#ffffff"
-    });
-
-    Phaser.Display.Align.In.Center(this.text, this.add.zone(300, -110, 600, 900));
-    Phaser.Display.Align.In.Center(this.tooltip, this.add.zone(540, -110, 600, 900));
+    this.text = this.add.text(300, -110, "Choose your dress",
+      { fontFamily: '"Nunito Sans", "Times New Roman", serif',
+        fontStyle: "normal",
+        fontWeight: 700,
+        fontSize: 24,
+        lineHeight: 33,
+        letterSpacing: -0.05,
+        color: "#ffffff"
+      })
+      .setOrigin(0.5, 0.5);
     
     // action on user`s choice
     this.choice1.setInteractive().on('pointerdown',
@@ -144,7 +142,7 @@ class Tutorial extends Phaser.Scene {
       this.tweens.timeline({
         tweens: [{
           targets: this.text,
-          y: 16,
+          y: 33,
           duration: 200,
           delay: 100,
         }],
@@ -166,7 +164,7 @@ class Tutorial extends Phaser.Scene {
       this.tweens.timeline({
         tweens: [{
           targets: this.tooltip,
-          y: 10,
+          y: 35,
           duration: 200,
           delay: 100,
           onComplete: () => this.isShowHint = false

@@ -99,11 +99,11 @@ class Scene1 extends Phaser.Scene {
 
     // tooltip and progressbar changing
     this.tooltip = this.add
-      .image(0, 0, "tooltip")
-      .setOrigin(0, 0)
+      .image(300, -110, "tooltip")
+      .setOrigin(0.5, 0.5)
       .setScale(.5);
 
-    this.text = this.add.text(0, 0, "Choose your bag",
+    this.text = this.add.text(300, -110, "Choose your bag",
       { fontFamily: '"Nunito Sans", "Times New Roman", serif',
         fontStyle: "normal",
         fontWeight: 700,
@@ -111,24 +111,22 @@ class Scene1 extends Phaser.Scene {
         lineHeight: 33,
         letterSpacing: -0.05,
         color: "#ffffff"
-      });
-
-    Phaser.Display.Align.In.Center(this.text, this.add.zone(300, -110, 600, 900));
-    Phaser.Display.Align.In.Center(this.tooltip, this.add.zone(540, -110, 600, 900));
+      })
+      .setOrigin(0.5, 0.5);
 
     this.progressbarEmpty = this.add
-      .image(40, -50, "progressbar-0")
-      .setOrigin(0, 0);
+      .image(300, -50, "progressbar-0")
+      .setOrigin(0.5, 0.5);
 
     this.progressbar1 = this.add
-      .image(40, 10, "progressbar-1")
-      .setOrigin(0, 0)
+      .image(300, 20, "progressbar-1")
+      .setOrigin(0.5, 0.5)
       .setAlpha(0);
 
     this.tweens.timeline({
       tweens: [{
         targets: this.progressbarEmpty,
-        y: 10,
+        y: 20,
         duration: 400,
         repeat: 0,
         delay: 300,

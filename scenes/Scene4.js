@@ -133,12 +133,11 @@ class Scene4 extends Phaser.Scene {
       .setAlpha(0);
 
     this.link = this.add
-      .image(0,0, "play-now")
+      .image(300, 800, "play-now")
+      .setOrigin(0.5, 0.5)
       .setAlpha(0)
       .setInteractive()
       .on('pointerdown', () => this.getGame());
-      
-    Phaser.Display.Align.In.Center(this.link, this.add.zone(300, 800, 600, 900));
     
     // remove phrase and show link to game
     this.tweens.timeline({
