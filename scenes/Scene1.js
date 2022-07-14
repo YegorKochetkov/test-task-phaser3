@@ -9,24 +9,6 @@ class Scene1 extends Phaser.Scene {
 
   create() {
     this.nextScene = 2;
-
-    // // background smooth clear tint
-    // this.background = this.add
-    //   .image(-350, -7, "background-home")
-    //   .setOrigin(0, 0);
-
-    // this.backgroundTint = this.add
-    //   .image(-350, -7, "background-home")
-    //   .setOrigin(0, 0)
-    //   .setTint(0x666666);
-
-    // this.tweens.timeline({
-    //   tweens: [{
-    //     targets: [this.backgroundTint],
-    //     alpha: 0,
-    //     duration: 600,
-    //   }],
-    // });
   
     // girl change dress at scene start
     this.girl = this.add.sprite(110, 32, "girl-shy")
