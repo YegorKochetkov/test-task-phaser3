@@ -15,6 +15,15 @@ body {
   background-color: black;
 }
 
+/* preload backgrounds because in preload it doesn't work properly with git*/
+body::after {
+  position: absolute;
+  z-index: -1;
+  content:
+    url("assets/background-day.jpg") 
+    url("assets/background-evening.jpg");
+}
+
 .background-tint {
   background-color: rgba(0,0, 0, 0.5);
   background-blend-mode: multiply;
