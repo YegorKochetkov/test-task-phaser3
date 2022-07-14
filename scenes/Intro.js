@@ -4,12 +4,14 @@ class Intro extends Phaser.Scene {
   }
 
   preload() {
+    document.body.classList.add("background-tint");
+    
     // boot progress
     const progressBar = this.add.graphics();
     const progressBox = this.add.graphics();
 
-    const width = this.cameras.main.width;
-    const height = this.cameras.main.height;
+    const width = this.game.config.width;
+    const height = this.game.config.height;
     
     const loadingText = this.make.text({
         x: width / 2,
@@ -78,8 +80,6 @@ class Intro extends Phaser.Scene {
     this.load.image("Paul-phrase-1", "assets/Paul-phrase-1.png");
     this.load.image("Lexy-phrase-1", "assets/Lexy-phrase-1.png");
 
-    this.load.image("background-home", "assets/background-home.jpg");
-
     // for tutorial
     this.load.image("girl-shy", "assets/girl-shy-regular-cloth.png");
     this.load.image("girl-joy", "assets/girl-joy-regular-cloth.png");
@@ -128,19 +128,12 @@ class Intro extends Phaser.Scene {
     this.load.image("progressbar-3", "assets/progressbar-3.png");
     
     // for scene4
-    this.load.image("background-day", "assets/background-day.jpg");
-    this.load.image("background-evening", "assets/background-evening.jpg");
     this.load.image("Paul-phrase-2", "assets/Paul-phrase-2.png");
     this.load.image("play-now", "assets/play-now.png");
     this.load.image("link-tint", "assets/tint.png");
   }
 
   create() {
-    this.background = this.add
-      .image(-350, 0, "background-home")
-      .setOrigin(0, 0)
-      .setTint(0x666666);
-
     this.man = this.add
       .sprite(-10, -200, "man-flirty")
       .setScale(.9)

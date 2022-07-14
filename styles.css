@@ -1,7 +1,43 @@
 body {
-  font-family: 'Nunito Sans', sans-serif;
   box-sizing: border-box;
-  margin: 0 auto;
+  font-family: 'Nunito Sans', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  
+  margin: 0;
   padding: 0;
+
+  background-image: url("assets/background-home.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
   background-color: black;
+}
+
+.background-tint {
+  background-color: rgba(0,0, 0, 0.5);
+  background-blend-mode: multiply;
+}
+
+.background-day,
+.background-evening {
+  background-image: 
+    url("assets/tint.png"),
+    url("assets/background-day.jpg");
+  background-position: bottom, center;
+  background-size: 100% 0, cover;
+  background-repeat: no-repeat;
+}
+
+.background-evening {
+  background-image: 
+    url("assets/tint.png"),
+    url("assets/background-evening.jpg");
+}
+
+.background-day.tint,
+.background-evening.tint {
+  transition: all 0.3s;
+  background-size: 100% 50%, cover;
 }

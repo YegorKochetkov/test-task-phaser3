@@ -9,10 +9,6 @@ class Scene3 extends Phaser.Scene {
 
   create() {
     this.nextScene = 4;
-
-    this.background = this.add
-      .image(-350, -7, "background-home")
-      .setOrigin(0, 0);
   
     // girl change dress at scene start
     if (this.gameData.startsWith("11")) {

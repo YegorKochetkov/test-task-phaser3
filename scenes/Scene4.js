@@ -10,15 +10,9 @@ class Scene4 extends Phaser.Scene {
   create() {
     const placeChoice = this.gameData[this.gameData.length - 1];
 
-    this.background = placeChoice === "1"
-      ? this.add
-          .image(0, -25, "background-day")
-          .setOrigin(0, 0)
-          .setScale(1.03)
-      : this.add
-          .image(-440, -5, "background-evening")
-          .setOrigin(0, 0)
-          .setScale(1.03);
+    placeChoice === "1"
+      ? document.body.classList.add("background-day")
+      : document.body.classList.add("background-evening");
     
     this.man = this.add
       .sprite(615, -145, "man-joy")
@@ -126,27 +120,22 @@ class Scene4 extends Phaser.Scene {
         onStart: () => this.man.play("man-talk"),
       }]
     });
-    
-    this.tint = this.add
-      .image(0, 180, "link-tint")
-      .setOrigin(0, 0).setTint(0xff0000)
-      .setAlpha(0);
 
     this.link = this.add
-      .image(300, 800, "play-now")
+      .image(300, 1000, "play-now")
       .setOrigin(0.5, 0.5)
-      .setAlpha(0)
       .setInteractive()
       .on('pointerdown', () => this.getGame());
     
     // remove phrase and show link to game
     this.tweens.timeline({
       tweens: [{
-        targets: [this.link, this.tint],
+        targets: [this.link],
         ease: "Linear",
         duration: 200,
         delay: 1900,
-        alpha: 1,
+        y: 800,
+        onStart: () => document.body.classList.add("tint")
       }]
     });
   

@@ -7,11 +7,6 @@ class Tutorial extends Phaser.Scene {
     this.nextScene = 1;
     this.gameData = "";
 
-    this.backgroundTint = this.add
-      .image(-350, 0, "background-home")
-      .setOrigin(0, 0)
-      .setTint(0x666666);
-
     // create talking girl animation from different images
     this.girl = this.add
       .sprite(-30, -230, "girl-surprised")
@@ -109,6 +104,7 @@ class Tutorial extends Phaser.Scene {
 
   // action on user`s choice: save choice and start new scene
   onChoice(choice) {
+    document.body.classList.remove("background-tint"),
     this.isShowHint = false,
     this.isHintAnimation = false,
     this.pointer.setAlpha(0),
@@ -130,7 +126,7 @@ class Tutorial extends Phaser.Scene {
           this.gameData = choice === this.choice1 ? this.gameData + 1 : this.gameData + 2;
           
           return this.scene
-          .start("Scene" + this.nextScene, this.gameData)
+            .start("Scene" + this.nextScene, this.gameData)
         }
       }],
     })
